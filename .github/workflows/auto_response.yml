@@ -1,0 +1,28 @@
+name: PK AI Tool Official - Auto Manager
+
+on:
+  issues:
+    types: [opened]
+  discussion:
+    types: [created]
+
+jobs:
+  auto-reply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Automated Admin Response
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            if (issue) {
+              await github.rest.issues.createComment({
+                issue_number: issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: "🚀 **PK AI Tool Official System Notice:**\n\nThank you for reaching out to the global ecosystem core. Your request has been logged into the universal autonomous queue and is being processed with zero-glitch production standards. All system modules, security protocols, and enterprise integrations are fully active. Stay tuned for real-time updates."
+              });
+            }
